@@ -1,20 +1,17 @@
-﻿#region "License"
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Text;
+
+#region "License"
 // Blitzkrieg Software Superpack Libraries
-// Copyright (c) 2002-2018 Stuart Williams (spookdejur@hotmail.com)
+// Copyright (c) 2002-2021 Stuart Williams (spookdejur@hotmail.com)
 // MIT License 
 #endregion
 
-
 namespace BlitzkriegSoftware.AdoSqlHelper
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.SqlClient;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Helpers for dealing with SQL Server
     /// </summary>
@@ -107,7 +104,7 @@ namespace BlitzkriegSoftware.AdoSqlHelper
         /// <returns></returns>
         public static T ExecuteStoredProcedureWithParametersToScaler<T>(string connectionString, string ProcedureName, List<SqlParameter> parameters, int TimeOut = Timeout_Default)
         {
-            T data = default(T);
+            T data = default;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -201,7 +198,7 @@ namespace BlitzkriegSoftware.AdoSqlHelper
         public static T ExecuteSqlWithParametersToScaler<T>(string connectionString, string SQL, List<SqlParameter> parameters, int TimeOut = Timeout_Default)
         {
             System.Data.CommandType CmdType = System.Data.CommandType.Text;
-            T data = default(T);
+            T data = default;
 
             using (var conDB = new System.Data.SqlClient.SqlConnection(connectionString))
             {
@@ -221,7 +218,6 @@ namespace BlitzkriegSoftware.AdoSqlHelper
         #endregion
 
         #region "Utilities"
-
 
         /// <summary>
         /// Does data table have rows?
@@ -333,8 +329,10 @@ namespace BlitzkriegSoftware.AdoSqlHelper
         /// <returns>SqlParameter</returns>
         public static SqlParameter ParameterBuilder(string name, System.Data.SqlDbType dbType, object value)
         {
-            var p = new SqlParameter(name, dbType);
-            p.Value = value;
+            var p = new SqlParameter(name, dbType)
+            {
+                Value = value
+            };
             return p;
         }
 

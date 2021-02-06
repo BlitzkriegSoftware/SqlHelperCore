@@ -1,13 +1,13 @@
+#region "Usings"
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+#endregion
 
 namespace BlitzkriegSoftware.AdoSqlHelper.Test
 {
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Data.SqlClient;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.IO;
 
     [TestClass]
     public class Test_SqlHelper
@@ -54,7 +54,7 @@ namespace BlitzkriegSoftware.AdoSqlHelper.Test
                 if (shortPath.Equals(filename))
                 {
                     var path = Path.ChangeExtension(f, "");
-                    return path.Substring(0, path.Length - 1);
+                    return path[0..^1];
                 }
             }
             return string.Empty;
@@ -62,9 +62,7 @@ namespace BlitzkriegSoftware.AdoSqlHelper.Test
 
         public static string DirSearch(string directory, string filename)
         {
-            string path = string.Empty;
-
-            path = FindFiles(directory, filename);
+            var path = FindFiles(directory, filename);
             if (!string.IsNullOrWhiteSpace(path)) return path;
 
             foreach (string d in Directory.GetDirectories(directory))
@@ -84,13 +82,21 @@ namespace BlitzkriegSoftware.AdoSqlHelper.Test
             var log = $"{dbPath}_log.ldf";
             if (File.Exists(log)) File.Delete(log);
             var cSql = $"CREATE DATABASE [Zoo] ON ( FILENAME = '{dbPath}.mdf') FOR ATTACH;";
-            SqlHelper.ExecuteSqlWithParametersNoReturn(cs, cSql, null);
+            try
+            {
+                SqlHelper.ExecuteSqlWithParametersNoReturn(cs, cSql, null);
+            } catch(SqlException ex)
+            {
+                if (!ex.Message.Contains("Database 'Zoo' already exists."))
+                {
+                    throw;
+                }
+            }
         }
 
         private static void DetachDb()
         {
             var cs = MasterMakeConnectionString();
-            var dbPath = DirSearch(Directory.GetCurrentDirectory(), Database_Name);
             var cSql = $"EXEC sp_detach_db 'Zoo', 'true';";
             SqlHelper.ExecuteSqlWithParametersNoReturn(cs, cSql, null);
         }
@@ -220,6 +226,5 @@ namespace BlitzkriegSoftware.AdoSqlHelper.Test
         }
 
         #endregion
-
     }
 }

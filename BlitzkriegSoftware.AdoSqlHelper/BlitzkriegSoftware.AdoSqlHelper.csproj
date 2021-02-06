@@ -5,15 +5,35 @@
     <Authors>Stuart Williams</Authors>
     <Company>Blitzkrieg Software</Company>
     <Description>A set of little ADO.NET SQL Server Helpers for .NET Core</Description>
-    <Copyright>(c) 2016-2019</Copyright>
+    <Copyright>(c) 2016-2021</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/BlitzkriegSoftware/SqlHelperCore</PackageProjectUrl>
     <PackageTags>.Net Core, SQL Server, Helpers</PackageTags>
-    <PackageReleaseNotes>This is a port of the .NET Classic Version</PackageReleaseNotes>
+    <PackageReleaseNotes>This is a port of the .NET Classic Version to .NET Core</PackageReleaseNotes>
+    <Version>1.1.0</Version>
+    <RepositoryUrl>https://github.com/BlitzkriegSoftware/SqlHelperCore</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>favicon_32x32_o7Z_icon.ico</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
+    <None Remove="favicon_32x32_o7Z_icon.ico" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="favicon_32x32_o7Z_icon.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="favicon_32x32_o7Z_icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup>
