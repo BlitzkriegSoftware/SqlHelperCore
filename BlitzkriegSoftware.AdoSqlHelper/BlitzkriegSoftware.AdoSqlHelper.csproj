@@ -9,31 +9,44 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/BlitzkriegSoftware/SqlHelperCore</PackageProjectUrl>
     <PackageTags>.Net Core, SQL Server, Helpers</PackageTags>
-    <PackageReleaseNotes>This is a port of the .NET Classic Version to .NET Core</PackageReleaseNotes>
+    <PackageReleaseNotes>1.1.0 - Upgraded NuGets and Added MD documentation to NuPkg
+1.0.0 - This is a port of the .NET Classic Version to .NET Core</PackageReleaseNotes>
     <Version>1.1.0</Version>
     <RepositoryUrl>https://github.com/BlitzkriegSoftware/SqlHelperCore</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIcon>favicon_32x32_o7Z_icon.ico</PackageIcon>
+    <PackageIcon>blizkrieglogo300_50.png</PackageIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\BlitzkriegSoftware.AdoSqlHelper.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="favicon_32x32_o7Z_icon.ico" />
+    <None Remove="BlitzkriegSoftware.AdoSqlHelper.md" />
+    <None Remove="BlitzkriegSoftware.AdoSqlHelper.xml" />
     <None Include="..\.editorconfig" Link=".editorconfig" />
-    <None Include="favicon_32x32_o7Z_icon.ico">
+    <None Include="blizkrieglogo300_50.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="favicon_32x32_o7Z_icon.ico">
+    <Content Include="BlitzkriegSoftware.AdoSqlHelper.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BlitzkriegSoftware.AdoSqlHelper.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="Vsxmd" Version="1.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

@@ -1,3 +1,4 @@
+![Logo](BlitzkriegSoftware.AdoSqlHelper/blizkrieglogo300_50.png)
 # SqlHelperCore #
 SQL Helpers for .NET Core. For doing quick operations against SQL Server using ADO.
 
@@ -10,6 +11,8 @@ Download: https://www.microsoft.com/en-us/download/details.aspx?id=55994
 There is a start-up script for SQL-Express if needed `Start-SQLExpress.cmd`
 
 ## Methods ##
+
+[Detailed Documentation](./BlitzkriegSoftware.AdoSqlHelper/BlitzkriegSoftware.AdoSqlHelper.md)
 
 ### Stored Procedure ###
 
@@ -51,7 +54,7 @@ A little test database `Zoo.mdf` is provided to serve as the bed for testing. It
 The test framework attaches and detaches the DB as part of the testing.
 
 ## License
-Copyright (c) 2018-2019
+Copyright (c) 2018-2021
 Licensed under the [MIT license](LICENSE).
 
 ## About me ##
